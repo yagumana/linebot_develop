@@ -41,17 +41,19 @@ def callback():
 
     return 'OK'
 
+# os.mkdir('tmp')
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 
-    s = gTTS(text=event.message.text, lang='ja')
-    s.save('./tmp/audio.mp3')
+    # s = gTTS(text=event.message.text, lang='ja')
+    # s.save('./tmp/audio.mp3')
 
     line_bot_api.reply_message(
         event.reply_token,
         AudioSendMessage(
-            original_content_url='https://yl-bot-test.herokuapp.com/tmp/audio.mp3',
+            # original_content_url='https://yl-bot-test.herokuapp.com/tmp/audio.mp3',
+            original_content_url='https://dl.espressif.com/dl/audio/ff-16b-2c-44100hz.m4a',
             duration=5000
         )
     )
