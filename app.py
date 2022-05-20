@@ -56,9 +56,8 @@ def handle_message(event):
 
     audio_name = randomname(10)
 
-    if os.path.exists('tmp'):
-        shutil.rmtree('tmp')
-    os.mkdir('tmp')
+    if not os.path.exists('tmp'):
+        os.mkdir('tmp')
 
     # 音声合成 → /tmpに保存
     s = gTTS(text=event.message.text, lang='ja')
