@@ -55,6 +55,7 @@ def handle_message(event):
 
     audio_name = randomname(10)
 
+    # 音声合成 → /tmpに保存
     s = gTTS(text=event.message.text, lang='ja')
     s.save(f'./tmp/{audio_name}.mp3')
 
