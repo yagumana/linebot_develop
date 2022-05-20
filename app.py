@@ -55,8 +55,8 @@ def handle_message(event):
 
     audio_name = randomname(10)
 
-    # s = gTTS(text=event.message.text, lang='ja')
-    # s.save(f'./tmp/{audio_name}.mp3')
+    s = gTTS(text=event.message.text, lang='ja')
+    s.save(f'./tmp/{audio_name}.mp3')
 
     # line_bot_api.reply_message(
     #     event.reply_token,
