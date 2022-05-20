@@ -11,7 +11,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+    MessageEvent, AudioMessage, AudioSendMessage,
 )
 
 app = Flask(__name__)
@@ -43,7 +43,7 @@ def callback():
 
 # os.mkdir('tmp')
 
-@handler.add(MessageEvent, message=TextMessage)
+@handler.add(MessageEvent, message=AudioMessage)
 def handle_message(event):
 
     # s = gTTS(text=event.message.text, lang='ja')
@@ -53,7 +53,7 @@ def handle_message(event):
         event.reply_token,
         AudioSendMessage(
             # original_content_url='https://yl-bot-test.herokuapp.com/tmp/audio.mp3',
-            original_content_url='https://dl.espressif.com/dl/audio/ff-16b-2c-44100hz.m4a',
+            original_content_url='https://dl.espressif.com/dl/audio/gs-16b-1c-44100hz.m4a',
             duration=5000
         )
     )
