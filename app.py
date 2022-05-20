@@ -60,19 +60,19 @@ def handle_message(event):
     s = gTTS(text=event.message.text, lang='ja')
     s.save(f'./tmp/{audio_name}.mp3')
 
-    # line_bot_api.reply_message(
-    #     event.reply_token,
-    #     AudioSendMessage(
-    #         original_content_url=f'https://yl-bot-test.herokuapp.com/tmp/{audio_name}.mp3',
-    #         duration=240000
-    #     )
-    # )
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(
-            text=f'https://yl-bot-test.herokuapp.com/tmp/{audio_name}.mp3'
+        AudioSendMessage(
+            original_content_url=f'https://yl-bot-test.herokuapp.com/tmp/{audio_name}.mp3',
+            duration=240000
         )
     )
+    # line_bot_api.reply_message(
+    #     event.reply_token,
+    #     TextSendMessage(
+    #         text=f'https://yl-bot-test.herokuapp.com/tmp/{audio_name}.mp3'
+    #     )
+    # )
 
 if __name__ == "__main__":
     app.run()
