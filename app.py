@@ -50,13 +50,14 @@ def callback():
 def send_file(filename): 
     return send_from_directory('tmp', filename)
 
+os.mkdir('tmp')
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 
     audio_name = randomname(10)
 
     # 音声合成 → /tmpに保存
-    os.mkdir('tmp')
     s = gTTS(text=event.message.text, lang='ja')
     s.save(f'./tmp/{audio_name}.mp3')
 
