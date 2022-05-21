@@ -4,7 +4,6 @@ from flask import Flask, request, abort, send_from_directory
 from gtts import gTTS
 import random, string
 from pydub import AudioSegment
-# import ffmpeg
 import math
 
 from linebot import (
@@ -61,7 +60,7 @@ def handle_message(event):
         os.mkdir('tmp')
 
     # 音声合成 → /tmpに保存
-    s = gTTS(text=event.message.text, lang='ja')
+    s = gTTS(text=event.message.text, lang='en')
     s.save(f'./tmp/{audio_name}.mp3')
 
     # mp3の長さ取得
