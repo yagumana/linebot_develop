@@ -69,7 +69,7 @@ def handle_message(event):
     audio_duration = math.floor(sound.duration_seconds*1000)
 
     # mp3 -> m4a
-    sound.export(f'./tmp/{audio_name}.m4a', 'm4a')
+    sound.export(f'./tmp/{audio_name}.m4a', format="ipod", codec="aac", bitrate="320K")
 
     line_bot_api.reply_message(
         event.reply_token,
