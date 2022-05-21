@@ -56,7 +56,7 @@ def send_file(filename):
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 
-    access_counter += 1
+    # access_counter += 1
 
     audio_name = randomname(10)
 
@@ -74,13 +74,13 @@ def handle_message(event):
     # mp3 -> m4a
     sound.export(f'./tmp/{audio_name}.m4a', format="ipod", codec="aac", bitrate="320K")
 
-    line_bot_api.reply_message(
-        event.reply_token,
-        AudioSendMessage(
-            original_content_url=f'https://yl-bot-test.herokuapp.com/tmp/{audio_name}.m4a',
-            duration=audio_duration
-        )
-    )
+    # line_bot_api.reply_message(
+    #     event.reply_token,
+    #     AudioSendMessage(
+    #         original_content_url=f'https://yl-bot-test.herokuapp.com/tmp/{audio_name}.m4a',
+    #         duration=audio_duration
+    #     )
+    # )
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(
