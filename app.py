@@ -22,6 +22,8 @@ def randomname(n):
 
 app = Flask(__name__)
 
+access_counter = 0
+
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
 YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
 
@@ -54,13 +56,15 @@ def send_file(filename):
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 
+    access_counter += 1
+
     audio_name = randomname(10)
 
     if not os.path.exists('tmp'):
         os.mkdir('tmp')
 
     # 音声合成 → /tmpに保存
-    s = gTTS(text=event.message.text, lang='en')
+    s = gTTS(text=event.message.text, lang='ja')
     s.save(f'./tmp/{audio_name}.mp3')
 
     # mp3の長さ取得
@@ -77,12 +81,12 @@ def handle_message(event):
             duration=audio_duration
         )
     )
-    # line_bot_api.reply_message(
-    #     event.reply_token,
-    #     TextSendMessage(
-    #         text=f'https://yl-bot-test.herokuapp.com/tmp/{audio_name}.mp3'
-    #     )
-    # )
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(
+            text=access_counter
+        )
+    )
 
 if __name__ == "__main__":
     app.run()
