@@ -68,10 +68,13 @@ def handle_message(event):
     sound = AudioSegment.from_mp3(f'./tmp/{audio_name}.mp3')
     audio_duration = math.floor(sound.duration_seconds*1000)
 
+    # mp3 -> m4a
+    sound.export(f'./tmp/{audio_name}.m4a', 'm4a')
+
     line_bot_api.reply_message(
         event.reply_token,
         AudioSendMessage(
-            original_content_url=f'https://yl-bot-test.herokuapp.com/tmp/{audio_name}.mp3',
+            original_content_url=f'https://yl-bot-test.herokuapp.com/tmp/{audio_name}.m4a',
             duration=audio_duration
         )
     )
