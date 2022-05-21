@@ -94,7 +94,7 @@ def handle_message(event):
     if MySession.read_context(user_id) == "0":
         if input_text == "読み上げ":
             line_bot_api.reply_message(
-                event.reply.token,
+                event.reply_token,
                 TextSendMessage(
                     text="読み上げたい文章を入力してください"
                 )
@@ -102,7 +102,7 @@ def handle_message(event):
             MySession.update_context(user_id, "1")
         elif input_text == "音声加工":
             line_bot_api.reply_message(
-                event.reply.token,
+                event.reply_token,
                 TextSendMessage(
                     text="音声加工は準備中です"
                 )
@@ -110,7 +110,7 @@ def handle_message(event):
             MySession.reset(user_id)
         else:
             line_bot_api.reply_message(
-                event.reply.token,
+                event.reply_token,
                 TextSendMessage(
                     text="「読み上げ」か「音声加工」と入力してください]"
                 )
