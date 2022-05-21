@@ -4,12 +4,13 @@ from flask import Flask, request, abort, send_from_directory
 from gtts import gTTS
 import random, string
 from pydub import AudioSegment
+import ffmpeg
 import math
 
 from linebot import (
     LineBotApi, WebhookHandler
 )
-from linebot.exceptions import (\
+from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
@@ -64,7 +65,7 @@ def handle_message(event):
     s.save(f'./tmp/{audio_name}.mp3')
 
     # mp3の長さ取得
-    sound = AudioSegment.from_file(f'./tmp/{audio_name}.mp3', "mp3")
+    sound = AudioSegment.from_mp3(f'./tmp/{audio_name}.mp3')
     audio_duration = math.floor(sound.duration_seconds*1000)
 
     line_bot_api.reply_message(
