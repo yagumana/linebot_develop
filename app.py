@@ -56,7 +56,7 @@ def send_file(filename):
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 
-    # access_counter += 1
+    access_counter = access_counter + 1
 
     audio_name = randomname(10)
 
