@@ -4,7 +4,7 @@ from flask import Flask, request, abort, send_from_directory
 from gtts import gTTS
 import random, string
 from pydub import AudioSegment
-import ffmpeg
+# import ffmpeg
 import math
 
 from linebot import (
