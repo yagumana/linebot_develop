@@ -1,15 +1,15 @@
 import os
-import shutil
 from flask import Flask, request, abort, send_from_directory
 
-import ffmpeg
 from gtts import gTTS
 import random, string
+from pydub import AudioSegment
+import math
 
 from linebot import (
     LineBotApi, WebhookHandler
 )
-from linebot.exceptions import (
+from linebot.exceptions import (\
     InvalidSignatureError
 )
 from linebot.models import (
@@ -63,11 +63,15 @@ def handle_message(event):
     s = gTTS(text=event.message.text, lang='ja')
     s.save(f'./tmp/{audio_name}.mp3')
 
+    # mp3の長さ取得
+    sound = AudioSegment.from_file(f'./tmp/{audio_name}', "mp3")
+    audio_duration = math.floor(sound.duration_seconds*1000)
+
     line_bot_api.reply_message(
         event.reply_token,
         AudioSendMessage(
             original_content_url=f'https://yl-bot-test.herokuapp.com/tmp/{audio_name}.mp3',
-            duration=240000
+            duration=audio_duration
         )
     )
     # line_bot_api.reply_message(
