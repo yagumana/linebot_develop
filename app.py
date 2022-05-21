@@ -64,7 +64,7 @@ def handle_message(event):
     s.save(f'./tmp/{audio_name}.mp3')
 
     # mp3の長さ取得
-    sound = AudioSegment.from_file(f'./tmp/{audio_name}', "mp3")
+    sound = AudioSegment.from_file(f'./tmp/{audio_name}.mp3', "mp3")
     audio_duration = math.floor(sound.duration_seconds*1000)
 
     line_bot_api.reply_message(
