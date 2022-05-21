@@ -93,33 +93,31 @@ def handle_message(event):
 
     if MySession.read_context(user_id) == "0":
         if input_text == "読み上げ":
-            MySession.update_context(user_id, "1")
             line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(
                     text="読み上げたい文章を入力してね！"
                 )
             )
+            MySession.update_context(user_id, "1")
         elif input_text == "音声加工":
-            MySession.reset(user_id)
             line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(
                     text="音声加工は準備中..."
                 )
             )
-        else:
             MySession.reset(user_id)
+        else:
             line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(
                     text="「読み上げ」か「音声加工」と入力してね！]"
                 )
             )
+            MySession.reset(user_id)
     
     if MySession.read_context(user_id) == "1":
-        MySession.reset(user_id)
- 
         audio_name = randomname(10)
 
         if not os.path.exists('tmp'):
@@ -143,6 +141,7 @@ def handle_message(event):
                 duration=audio_duration
             )
         )
+        MySession.reset(user_id)
 
     # line_bot_api.reply_message(
     #     event.reply_token,
